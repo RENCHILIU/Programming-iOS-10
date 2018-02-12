@@ -42,12 +42,12 @@
     
     NO2: dequeueReusableCell(withIdentifier:for:)
     
-######NO2优点：
+###### NO2优点：
     The result is never nil ：没有cell会自动create
     The cell size is known earlier ：  从rowHeight 或者 delegate’s tableView(_:heightForRowAt:) 得知
     The identifier is consistent ：相比第一个方法，两个方法都要先申明register(_:forCellReuseIdentifier:)（除非cell来自storyboard）。 但是当你传递了错误的reuse identifier， 第二个方法会报错。 第一个方法则不会用错误的identifier（依然跑程序）。
     
-###  注意事项
+### 注意事项
     在viewdidload中registerCell（除非cell来自storyboard）
     如果当前ViewController不是UITableViewController，那么指明添加tableview的delegate和datasource
     
@@ -92,7 +92,7 @@
     tableView(_:numberOfRowsInSection:)
     tableView(_:cellForRowAt:)
     
-######Cell重用注意事项
+###### Cell重用注意事项
     if item.enclosures != nil && item.enclosures.count > 0 {
     cell.speaker.isHidden = false
     }
@@ -103,10 +103,10 @@
         !(item.enclosures != nil && item.enclosures.count > 0)
         
 ###     Table View Sections
-######section 方法
+###### section 方法
          numberOfSections(in:)
          
-######UITableViewHeaderFooterView 属性
+###### UITableViewHeaderFooterView 属性
          textLabel
          detailTextLabel
          contentView 
@@ -114,7 +114,7 @@
          
          Don’t set a UITableViewHeaderFooterView’s backgroundColor; instead, set the backgroundColor of its contentView（UITableViewHeaderFooterView 有一个contentView的属性）
          
-######UITableViewHeaderFooterView 重用机制
+###### UITableViewHeaderFooterView 重用机制
         代理方法：
         tableView(_:titleForHeaderInSection:)
         tableView(_:titleForFooterInSection:)         
@@ -128,20 +128,20 @@
         方法配置：
         tableView(_:willDisplayHeaderView:forSection:)
         tableView(_:willDisplayFooterView:forSection:)
-######Section Data  load
+###### Section Data  load
         同cell重用机制差不多，都是进行data load，reuse   
         label例子：
         View例子：
         
           
-######Section Index   
+###### Section Index   
         sectionIndexTitles(for tv: UITableView)
         属性：
         sectionIndexColor
         sectionIndexBackgroundColor
         sectionIndexTrackingBackgroundColor
         
-###Refreshing a Table View         
+### Refreshing a Table View         
         reload table view 不是regenerate 所有的data。
         因为：
         in a table that caches reusable cells, there are no cells of interest other than those actually showing in the table at this moment.
@@ -159,7 +159,7 @@
         .automatic
         
         
-######Direct Access to Cells
+###### Direct Access to Cells
         tableView.cellForRow(at:)
         可以直接获取cell， 但是如果你修改了cell，你也要对于的修改model。 不然下次reload，reuse会出错。
         
@@ -176,7 +176,7 @@
         
 
 
-###动态设置Cell的高度方法 Variable Row Heights   
+### 动态设置Cell的高度方法 Variable Row Heights   
 **oldest to newest but also from fastest to slowest**   
      the delegate’s tableView(_:heightForRowAt:) 
 
@@ -185,9 +185,9 @@
        tableView(_:heightForRowAt:) 会先于  tableView(_:heightForRowAt:)  最后 return cell
        在tableView(_:heightForRowAt:) 中计算多，会影响速度，可以先给个fake数组值，然后回到tableView(_:heightForRowAt:)在return cell前调用 setupCell的方法计算。
        
-######Measurement and Layout with Constraints
+###### Measurement and Layout with Constraints
        because every subview either is given explicit size constraints or else is the kind of view that has an implicit size based on its contents, like a label or an image view — then we can simply call systemLayoutSizeFitting(_:) to tell us the resulting height of the cell.
-######Estimated Height
+###### Estimated Height
 
     iOS7后三种属性&方法：
         estimatedRowHeight
@@ -200,7 +200,7 @@
     The estimated height is set in viewDidLoad:
          self.tableView.estimatedRowHeight = 75
          
-######Automatic Row Height
+###### Automatic Row Height
     in iOS 8 中引入
     
     使用：
@@ -261,7 +261,7 @@ Selection 不会因为reuse消失，但是reload 会deselect所有
 ###### Navigation from a Table View
     tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
   
-###补充  
+### 补充  
 ###### Table View Scrolling and Layout
     A UITableView is a UIScrollView
     
@@ -269,7 +269,7 @@ Selection 不会因为reuse消失，但是reload 会deselect所有
         scrollToRow(at:at:animated:)
         scrollToNearestSelectedRow(at:animated:)
     
-######Table View State Restoration
+###### Table View State Restoration
     modelIdentifierForElement(at:in:)
     indexPathForElement(withModelIdentifier:in:)
 
